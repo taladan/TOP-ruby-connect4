@@ -2,7 +2,7 @@
 
 # Player object for connect four
 class Player
-  attr_reader :name, :color
+  attr_reader :name, :token
 
   def initialize(name, color)
     @name = name
