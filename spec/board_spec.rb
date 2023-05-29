@@ -1,4 +1,5 @@
 # board_spec.rb
+# rubocop:disable Metrics/BlockLength
 require './lib/board'
 require './lib/player'
 
