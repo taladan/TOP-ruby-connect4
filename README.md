@@ -11,3 +11,13 @@ For this project, I think I'm going to need:
 - display object: Should handle outputting the game board and instructions to the screen
 
 These requirements may (and probably will) change as the project develops.
+
+## Implemented
+
+- board
+  - play(player, column) - puts player token in column numbered 0 - 6
+  - full?
+- player
+  - @name, @token
+- exceptions
+  - ColumnFull
