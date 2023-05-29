@@ -14,10 +14,12 @@ These requirements may (and probably will) change as the project develops.
 
 ## Implemented
 
-- board
-  - play(player, column) - puts player token in column numbered 0 - 6
-  - full?
-- player
+- ConnectFour
+  - @player1, @player2, board
+- Board
+  - #play(player, column) - puts player token in column numbered 0 - 6
+  - #full?
+- Player
   - @name, @token
-- exceptions
+- Exceptions
   - ColumnFull
