@@ -33,4 +33,20 @@ describe Board do
       end
     end
   end
+
+  describe '#full?' do
+    context 'When a board is not full' do
+      subject(:board) { Board.new }
+      it 'returns false' do
+        expect(board.full?).to eq(false)
+      end
+    end
+
+    context 'When a board is full' do
+      subject(:board) { Board.new(Matrix.build(6, 7) { 'filled' }) }
+      it 'returns true' do
+        expect(board.full?).to eq(true)
+      end
+    end
+  end
 end
