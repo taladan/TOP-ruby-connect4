@@ -2,7 +2,6 @@
 require 'matrix'
 require_relative 'exceptions'
 require_relative 'player'
-require_relative 'display'
 
 # this class describes a board object for playing a game of connect four
 class Board
