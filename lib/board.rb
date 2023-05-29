@@ -21,6 +21,12 @@ class Board
     play_piece(player, column)
   end
 
+  # test to see if all slots in the board are filled
+  def full?
+    # if there are any values of ' ' in @board matrix, it is not full
+    !@board_matrix.any?(' ')
+  end
+
   private
 
   # test to see if column is filled
