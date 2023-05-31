@@ -9,6 +9,18 @@ module CfHelper
 
   private
 
+  def check_rows(matrix)
+    # code here
+  end
+
+  def check_columns(matrix)
+    # code here
+  end
+
+  def check_diagonals(matrix)
+    diagonals = calculate_diagonals(matrix)
+  end
+
   def calculate_diagonals(matrix)
     output = {
       ascending_diagonals: [],
@@ -39,15 +51,24 @@ module CfHelper
     output
   end
 
-  def check_rows
-    # code here
-  end
+  # find `len` consecutive elements in any array or vector passed
+  def find_consecutive_duplicates(vector, len = 4)
+    count = 1
+    current_element = nil
+    starting_index = nil
 
-  def check_columns
-    # code here
-  end
+    vector.each_with_index do |element, index|
+      if element == current_element
+        count += 1
+      else
+        count = 1
+        current_element = element
+        starting_index = index
+      end
 
-  def check_diagonals
-    # code here
+      return [current_element, starting_index] if count == len
+    end
+
+    nil
   end
 end
