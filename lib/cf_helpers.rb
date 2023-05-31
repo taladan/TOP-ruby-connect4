@@ -1,27 +1,46 @@
 # lib/cf_helpers.rb
 
 module CfHelper
-  def game_over?(matrix)
-    check_rows(matrix)
-    check_columns(matrix)
-    check_diagonals(matrix)
+  attr_reader :winner, :starting_index
+
+  def game_over?(matrix = @board_matrix)
+    check_rows(matrix) || check_columns(matrix) || check_diagonals(matrix)
   end
 
   private
 
-  def check_rows(matrix)
-    # code here
+  def check_rows(matrix = @board_matrix)
+    @winner = nil
+    @starting_index = nil
+    # iterate through rows
+    matrix.row_count.times do |count|
+      row = matrix.row(count)
+      # if there is a set of dupes found set `winner` & `starting_index` variables
+      @winner, @starting_index = find_consecutive_duplicates(row) unless find_consecutive_duplicates(row) == [nil, nil]
+    end
+    # return true if winner set, false if not
+    @winner ? true : false
   end
 
-  def check_columns(matrix)
-    # code here
+  def check_columns(matrix = @board_matrix)
+    @winner = nil
+    @starting_index = nil
+    # iterate through columns
+    matrix.column_count.times do |count|
+      col = matrix.column(count)
+      # if there is a set of dupes found set `winner` & `starting_index` variables
+      @winner, @starting_index = find_consecutive_duplicates(col) unless find_consecutive_duplicates(col) == [nil, nil]
+    end
+    # return true if winner set, false if not
+    @winner ? true : false
   end
 
-  def check_diagonals(matrix)
+  def check_diagonals(matrix = @board_matrix)
     diagonals = calculate_diagonals(matrix)
+    false
   end
 
-  def calculate_diagonals(matrix)
+  def calculate_diagonals(matrix = @board_matrix)
     output = {
       ascending_diagonals: [],
       descending_diagonals: []
