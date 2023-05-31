@@ -10,7 +10,7 @@ module CfHelper
   private
 
   def calculate_diagonals(matrix)
-    @diagonals = {
+    output = {
       ascending_diagonals: [],
       descending_diagonals: []
     }
@@ -33,10 +33,10 @@ module CfHelper
     rp = reverse_padded.transpose.map(&:compact)
 
     # We only want diagonals that are at least 4 long
-    fp.each { |i| @diagonals[:ascending_diagonals] << i if i.length >= 4 }
-    rp.each { |i| @diagonals[:descending_diagonals] << i if i.length >= 4 }
+    fp.each { |i| output[:ascending_diagonals] << i if i.length >= 4 }
+    rp.each { |i| output[:descending_diagonals] << i if i.length >= 4 }
 
-    @diagonals
+    output
   end
 
   def check_rows
