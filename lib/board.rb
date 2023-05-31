@@ -38,7 +38,8 @@ class Board
   end
 
   # put player's token in first empty slot of column
-  def play_piece(player, column)
-    @board_matrix[column, @board_matrix.column(column).find_index(' ')] = player.token
+  def play_piece(player, col)
+    row = @board_matrix.column(col).find_index(' ')
+    @board_matrix[row, col] = player.token
   end
 end
