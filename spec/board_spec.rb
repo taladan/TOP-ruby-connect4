@@ -50,4 +50,71 @@ describe Board do
       end
     end
   end
+
+  describe '#game_over?' do
+    let(:player1) { Player.new('Jamie', 'red') }
+    let(:player2) { Player.new('Angela', 'yellow') }
+    context 'When four consecutive red tokens are in the same row' do
+      subject(:board) { Board.new }
+      it 'returns true' do
+        board.play(player1, 0)
+        board.play(player1, 1)
+        board.play(player1, 2)
+        board.play(player1, 3)
+        expect(board.game_over?).to eq(true)
+      end
+    end
+
+    context 'When four consecutive red tokens are in the same column' do
+      subject(:board) { Board.new }
+      it 'returns true' do
+        board.play(player1, 0)
+        board.play(player1, 0)
+        board.play(player1, 0)
+        board.play(player1, 0)
+        expect(board.game_over?).to eq(true)
+      end
+    end
+
+    context 'When four consecutive red tokens are in an ascending diagonal' do
+      subject(:board) { Board.new }
+      it 'returns true' do
+        board.play(player1, 0)
+        board.play(player2, 1)
+        board.play(player1, 1)
+        board.play(player2, 2)
+        board.play(player2, 2)
+        board.play(player1, 2)
+        board.play(player1, 3)
+        board.play(player1, 3)
+        board.play(player2, 3)
+        board.play(player1, 3)
+        expect(board.game_over?).to eq(true)
+      end
+    end
+
+    context 'When four consecutive red tokens are in a descending diagonal' do
+      subject(:board) { Board.new }
+      it 'returns true' do
+        board.play(player1, 0)
+        board.play(player2, 0)
+        board.play(player2, 0)
+        board.play(player1, 0)
+        board.play(player2, 1)
+        board.play(player1, 1)
+        board.play(player1, 1)
+        board.play(player2, 2)
+        board.play(player1, 2)
+        board.play(player1, 3)
+        expect(board.game_over?).to eq(true)
+      end
+    end
+
+    context 'When there are no consecutive tokens of either color in any direction' do
+      subject(:board) { Board.new }
+      it 'returns false' do
+        expect(board.game_over?).to eq(false)
+      end
+    end
+  end
 end
