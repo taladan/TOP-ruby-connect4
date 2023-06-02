@@ -26,6 +26,8 @@ class Board
   def full?
     # if there are any nil values in @board matrix, it is not full
     return true unless @board_matrix.any?(&:nil?)
+
+    false
   end
 
   private
