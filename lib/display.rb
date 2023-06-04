@@ -1,11 +1,6 @@
 # lib/display.rb
 
 class Display
-  def initialize(matrix)
-    @matrix = matrix
-    @columns = matrix.column_count
-    @rows = matrix.row_count
-  end
   def clear
     system 'clear'
   end

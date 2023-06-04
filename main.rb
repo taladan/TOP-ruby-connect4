@@ -10,3 +10,7 @@
 # tokens in a line, then the player controlling that color of token wins the game.
 # If the board is filled and no consecutive lines of 4 tokens are created, this ends the game
 # in a draw.
+require './lib/connect_four'
+
+game = ConnectFour.new
+game.run

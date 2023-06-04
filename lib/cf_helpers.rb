@@ -37,7 +37,23 @@ module CfHelper
 
   def check_diagonals(matrix = @board_matrix)
     diagonals = calculate_diagonals(matrix)
-    false
+
+    # Check ascending diagonals
+    diagonals[:ascending_diagonals].each do |diagonal|
+      # if there is a set of dupes found set `winner` & `starting_index` variables
+      @winner, @starting_index = find_consecutive_duplicates(diagonal) unless find_consecutive_duplicates(diagonal) == [
+        nil, nil
+      ]
+    end
+
+    # check descending diagonals
+    diagonals[:descending_diagonals].each do |diagonal|
+      # if there is a set of dupes found set `winner` & `starting_index` variables
+      @winner, @starting_index = find_consecutive_duplicates(diagonal) unless find_consecutive_duplicates(diagonal) == [
+        nil, nil
+      ]
+    end
+    @winner ? true : false
   end
 
   def calculate_diagonals(matrix = @board_matrix)
