@@ -20,4 +20,14 @@ class Display
     column = gets.chomp until column =~ /^[0-7]$/
     column
   end
+
+  def print_board(matrix)
+    rows = matrix.row_count - 1
+    rows.downto(0) do |num|
+      matrix.row(num).each do |spot|
+        print " #{spot} "
+      end
+      print "\n\n"
+    end
+  end
 end
