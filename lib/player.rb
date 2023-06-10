@@ -1,4 +1,5 @@
 # lib/player.rb
+require "colorize"
 
 # Player object for connect four
 class Player
@@ -6,6 +7,6 @@ class Player
 
   def initialize(name, color)
     @name = name
-    @token = color
+    @token = '◯'.colorize(color.to_sym)
   end
 end
