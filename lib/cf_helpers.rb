@@ -93,7 +93,7 @@ module CfHelper
     starting_index = nil
 
     vector.each_with_index do |element, index|
-      if element == current_element
+      if element != '◯' && element == current_element
         count += 1
       else
         count = 1
