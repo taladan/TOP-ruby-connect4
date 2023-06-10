@@ -9,7 +9,7 @@ class Board
   include CfHelper
   attr_reader :board_matrix
 
-  def initialize(matrix = Matrix.build(6, 7) { nil })
+  def initialize(matrix = Matrix.build(6, 7) { '◯' })
     # build a 6 row, 7 column matrix with each position holding an empty space
     @board_matrix = matrix
   end
@@ -24,8 +24,8 @@ class Board
 
   # test to see if all slots in the board are filled
   def full?
-    # if there are any nil values in @board matrix, it is not full
-    return true unless @board_matrix.any?(&:nil?)
+    # if there are any ◯ values in @board matrix, it is not full
+    return true unless @board_matrix.any?('◯')
 
     false
   end
@@ -35,12 +35,14 @@ class Board
   # test to see if column is filled
   def column_full?(col)
     # return true if there are no nil values in column
-    @board_matrix.column(col).compact.count == @board_matrix.column(col).count
+    return true unless @board_matrix.column(col).any?('◯')
+
+    false
   end
 
   # put player's token in first empty slot of column
   def play_piece(player, col)
-    row = @board_matrix.column(col).find_index(nil)
+    row = @board_matrix.column(col).find_index('◯')
     @board_matrix[row, col] = player.token
   end
 end
