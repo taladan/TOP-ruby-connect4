@@ -9,13 +9,13 @@ class Display
   #   expects: string format of "Player N" for display, outputs: string
   def prompt_for_name(player)
     puts "Enter name for #{player}:"
-    name = gets.chomp
+    gets.chomp
   end
-  
+
   def play_again?
     response = nil
     until response =~ /[y|n]/
-      print "Play again?(y/n): "
+      print 'Play again?(y/n): '
       response = gets.downcase.chomp
     end
     response == 'y'
@@ -32,30 +32,29 @@ class Display
   end
 
   def intro
-   puts <<~INTRO
-    Welcome to Connect Four!
+    puts <<~INTRO
+      Welcome to Connect Four!
 
-    This is a two player game.  Each player gets a token '◯' that is colored either red or yellow.  
-    The object of the game is to line up four consecutive tokens either in a column, row, or diagonal
-    before your opponent does.
+      This is a two player game.  Each player gets a token '◯' that is colored either red or yellow.
+      The object of the game is to line up four consecutive tokens either in a column, row, or diagonal
+      before your opponent does.
 
-    The game will prompt each player to enter a column they wish to play in, from 0 to 6.
+      The game will prompt each player to enter a column they wish to play in, from 0 to 6.
 
-    The game will end when it detects four identical consecutive tokens in either a column, row, or diagonal.
-
-   INTRO
+      The game will end when it detects four identical consecutive tokens in either a column, row, or diagonal.
+    INTRO
   end
 
   def game_end
     victor = $player1 if $winner == $player1.token
     victor = $player2 if $winner == $player2.token
-    puts <<~END
+    puts <<~GAMEEND
 
-    GAME OVER
+      GAME OVER
 
-    #{victor.name} wins!
+      #{victor.name} wins!
 
-    END
+    GAMEEND
   end
 
   def print_board(matrix)
@@ -67,7 +66,7 @@ class Display
       print "\n\n"
     end
   end
-  
+
   def quit
     puts 'Thanks for playing!'
   end
