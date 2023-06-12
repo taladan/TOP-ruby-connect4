@@ -1,12 +1,10 @@
 # lib/board.rb
 require 'matrix'
-# require_relative 'cf_helpers'
 require_relative 'exceptions'
 require_relative 'player'
 
 # this class describes a board object for playing a game of connect four
 class Board
-  # include CfHelper
   attr_reader :board_matrix, :winner
 
   def initialize(matrix = Matrix.build(6, 7) { '◯' })
@@ -148,6 +146,6 @@ class Board
       return [current_element, starting_index] if count == len
     end
 
-    [nil,nil]
+    [nil, nil]
   end
 end
