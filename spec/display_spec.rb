@@ -14,4 +14,10 @@ describe Display do
   
   describe '#print_board' do
     # Only prints info to screen, doesn't need to be tested
+  end
+  
+  describe '#intro' do
+    # Only puts text to screen, doesn't need to be tested
+  end
+  
 end

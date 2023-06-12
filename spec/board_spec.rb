@@ -6,23 +6,23 @@ require './lib/player'
 describe Board do
   subject(:board) { Board.new }
   let(:player1) { Player.new('Jamie', 'red') }
-  let(:player2) { Player.new('Angela', 'yellow') }
+  let(:player2) { Player.new('Angela', 'blue') }
 
   describe '#play' do
     context 'When player1 inserts a piece into column 0 of an empty board' do
-      it 'puts the value `red` in the matrix cell [0,0]' do
+      it 'puts the value `"\e[0;31;49m◯\e[0m"` in the matrix cell [0,0]' do
         column = 0
         board.play(player1, column)
-        expect(board.board_matrix[0, 0]).to eq('red')
+        expect(board.board_matrix[0, 0]).to eq("\e[0;31;49m◯\e[0m")
       end
     end
 
     context 'When player2 inserts a piece into column 0 of an empty board after player 1' do
-      it 'puts the value `yellow` in the matrix cell [1,0]' do
+      it 'puts the value `"\e[0;34;49m◯\e[0m"` in the matrix cell [1,0]' do
         column = 0
         board.play(player1, column)
         board.play(player2, column)
-        expect(board.board_matrix[1, 0]).to eq('yellow')
+        expect(board.board_matrix[1, 0]).to eq("\e[0;34;49m◯\e[0m")
       end
     end
 
