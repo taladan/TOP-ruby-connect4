@@ -30,7 +30,7 @@ class ConnectFour
 
   def game_loop
     # initialize variables
-    @current_player = $player1
+    @current_player = @player1
     stop_playing = false
     until stop_playing
       if @board.game_over?
@@ -56,7 +56,7 @@ class ConnectFour
 
   def end_game
     update_screen
-    @display.game_end
+    @display.game_end(@player1, @player2, @board.winner)
   end
 
   def update_screen
@@ -65,12 +65,12 @@ class ConnectFour
   end
 
   def initialize_players
-    $player1 = Player.new(@display.prompt_for_name('Player 1'), 'red')
-    $player2 = Player.new(@display.prompt_for_name('Player 2'), 'blue')
+    @player1 = Player.new(@display.prompt_for_name('Player 1'), 'red')
+    @player2 = Player.new(@display.prompt_for_name('Player 2'), 'blue')
   end
 
   def swap_player
-    return $player2 if @current_player == $player1
-    return $player1 if @current_player == $player2
+    return @player2 if @current_player == @player1
+    return @player1 if @current_player == @player2
   end
 end

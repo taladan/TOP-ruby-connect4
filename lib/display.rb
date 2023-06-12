@@ -46,9 +46,9 @@ class Display
     INTRO
   end
 
-  def game_end
-    victor = $player1 if $winner == $player1.token
-    victor = $player2 if $winner == $player2.token
+  def game_end(player1, player2, winner)
+    victor = player1 if winner == player1.token
+    victor = player2 if winner == player2.token
     puts <<~GAMEEND
 
       GAME OVER
