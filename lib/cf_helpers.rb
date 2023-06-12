@@ -1,5 +1,6 @@
 # lib/cf_helpers.rb
 
+# helper module to handle game-end scenario
 module CfHelper
 
   def game_over?(matrix = @board_matrix)
