@@ -1,5 +1,6 @@
 # lib/display.rb
 
+# object for outputting text to terminal and gathering user input
 class Display
   def clear
     system 'clear'
