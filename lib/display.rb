@@ -11,13 +11,23 @@ class Display
     puts "Enter name for #{player}:"
     name = gets.chomp
   end
+  
+  def play_again?
+    response = nil
+    until response =~ /[y|n]/
+      print "Play again?(y/n): "
+      response = gets.downcase.chomp
+    end
+    response == 'y'
+  end
 
   # loop until number 0-7.  Need to make this
   # a non hardcoded value.
-  def prompt_for_play
-    puts 'Enter which column number [0-6] you want to play:'
+  require 'pry-byebug'
+  def prompt_for_play(name)
+    puts "#{name} enter which column number [0-6] you want to play:"
     column = nil
-    column = gets.chomp until column =~ /^[0-6]$/
+    column = gets.downcase.chomp until column =~ /^[0-6]|exit$/
     column
   end
 
@@ -36,6 +46,18 @@ class Display
    INTRO
   end
 
+  def game_end
+    victor = $player1 if $winner == $player1.token
+    victor = $player2 if $winner == $player2.token
+    puts <<~END
+
+    GAME OVER
+
+    #{victor.name} wins!
+
+    END
+  end
+
   def print_board(matrix)
     rows = matrix.row_count - 1
     rows.downto(0) do |num|
@@ -44,5 +66,9 @@ class Display
       end
       print "\n\n"
     end
+  end
+  
+  def quit
+    puts 'Thanks for playing!'
   end
 end

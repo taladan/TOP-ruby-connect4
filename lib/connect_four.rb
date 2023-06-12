@@ -7,25 +7,70 @@ require './lib/cf_helpers'
 # A game of connect four
 class ConnectFour
   def initialize
-    @board = Board.new
-    @display = Display.new(@board.board_matrix)
+    @display = Display.new
   end
 
   def run
-    @display.clear
-    @display.intro
+    play_again = true
+    intro
     initialize_players
-    game_loop
+    while play_again
+      @board = Board.new
+      game_loop
+      play_again = @display.play_again?
+    end
   end
 
   private
 
+  def intro
+    @display.clear
+    @display.intro
+  end
+
   def game_loop
-    current_player = @player1
+    # initialize variables
+    @current_player = $player1
+    stop_playing = false
+    until stop_playing
+      if @board.game_over?
+        stop_playing = true
+        end_game
+      else
+        update_screen
+        stop_playing, response = prompt_for_input
+        @board.play(@current_player, response.to_i)
+        @current_player = swap_player
+      end
+    end
+  end
+
+  def prompt_for_input
+    response = @display.prompt_for_play(@current_player.name)
+    if response == 'exit'
+      @display.quit
+      stop_playing = true
+    end
+    [stop_playing, response]
+  end
+
+  def end_game
+    update_screen
+    @display.game_end
+  end
+
+  def update_screen
+    @display.clear
+    @display.print_board(@board.board_matrix)
   end
 
   def initialize_players
-    @player1 = Player.new(display.prompt_for_name('Player 1'), 'red')
-    @player2 = Player.new(display.prompt_for_name('Player 2'), 'yellow')
+    $player1 = Player.new(@display.prompt_for_name('Player 1'), 'red')
+    $player2 = Player.new(@display.prompt_for_name('Player 2'), 'blue')
+  end
+
+  def swap_player
+    return $player2 if @current_player == $player1
+    return $player1 if @current_player == $player2
   end
 end

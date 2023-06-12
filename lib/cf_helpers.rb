@@ -1,7 +1,6 @@
 # lib/cf_helpers.rb
 
 module CfHelper
-  attr_reader :winner, :starting_index
 
   def game_over?(matrix = @board_matrix)
     check_rows(matrix) || check_columns(matrix) || check_diagonals(matrix)
@@ -10,38 +9,40 @@ module CfHelper
   private
 
   def check_rows(matrix = @board_matrix)
-    @winner = nil
-    @starting_index = nil
+    $winner = nil
+    starting_index = nil
     # iterate through rows
     matrix.row_count.times do |count|
       row = matrix.row(count)
       # if there is a set of dupes found set `winner` & `starting_index` variables
-      @winner, @starting_index = find_consecutive_duplicates(row) unless find_consecutive_duplicates(row) == [nil, nil]
+      $winner, starting_index = find_consecutive_duplicates(row) unless find_consecutive_duplicates(row) == [nil, nil]
     end
     # return true if winner set, false if not
-    @winner ? true : false
+    $winner ? true : false
   end
 
   def check_columns(matrix = @board_matrix)
-    @winner = nil
-    @starting_index = nil
+    $winner = nil
+    starting_index = nil
     # iterate through columns
     matrix.column_count.times do |count|
       col = matrix.column(count)
       # if there is a set of dupes found set `winner` & `starting_index` variables
-      @winner, @starting_index = find_consecutive_duplicates(col) unless find_consecutive_duplicates(col) == [nil, nil]
+      $winner, starting_index = find_consecutive_duplicates(col) unless find_consecutive_duplicates(col) == [nil, nil]
     end
     # return true if winner set, false if not
-    @winner ? true : false
+    $winner ? true : false
   end
 
   def check_diagonals(matrix = @board_matrix)
     diagonals = calculate_diagonals(matrix)
+    $winner = nil
+    starting_index = nil
 
     # Check ascending diagonals
     diagonals[:ascending_diagonals].each do |diagonal|
       # if there is a set of dupes found set `winner` & `starting_index` variables
-      @winner, @starting_index = find_consecutive_duplicates(diagonal) unless find_consecutive_duplicates(diagonal) == [
+      $winner, starting_index = find_consecutive_duplicates(diagonal) unless find_consecutive_duplicates(diagonal) == [
         nil, nil
       ]
     end
@@ -49,11 +50,11 @@ module CfHelper
     # check descending diagonals
     diagonals[:descending_diagonals].each do |diagonal|
       # if there is a set of dupes found set `winner` & `starting_index` variables
-      @winner, @starting_index = find_consecutive_duplicates(diagonal) unless find_consecutive_duplicates(diagonal) == [
+      $winner, starting_index = find_consecutive_duplicates(diagonal) unless find_consecutive_duplicates(diagonal) == [
         nil, nil
       ]
     end
-    @winner ? true : false
+    $winner ? true : false
   end
 
   def calculate_diagonals(matrix = @board_matrix)
@@ -104,6 +105,6 @@ module CfHelper
       return [current_element, starting_index] if count == len
     end
 
-    nil
+    [nil,nil]
   end
 end
