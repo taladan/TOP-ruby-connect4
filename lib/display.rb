@@ -24,7 +24,6 @@ class Display
 
   # loop until number 0-7.  Need to make this
   # a non hardcoded value.
-  require 'pry-byebug'
   def prompt_for_play(name)
     puts "#{name} enter which column number [0-6] you want to play:"
     column = nil
@@ -70,5 +69,9 @@ class Display
 
   def quit
     puts 'Thanks for playing!'
+  end
+
+  def column_full_message
+    puts 'That column is already full, please choose another.'
   end
 end
