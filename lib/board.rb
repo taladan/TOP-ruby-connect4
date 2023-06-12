@@ -32,7 +32,6 @@ class Board
     check_rows(matrix) || check_columns(matrix) || check_diagonals(matrix)
   end
 
-
   private
 
   # test to see if column is filled
