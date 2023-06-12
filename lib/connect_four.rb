@@ -2,7 +2,6 @@
 require './lib/board'
 require './lib/player'
 require './lib/display'
-require './lib/cf_helpers'
 
 # A game of connect four
 class ConnectFour
@@ -39,8 +38,13 @@ class ConnectFour
       else
         update_screen
         stop_playing, response = prompt_for_input
-        @board.play(@current_player, response.to_i)
-        @current_player = swap_player
+        begin 
+          @board.play(@current_player, response.to_i)
+          @current_player = swap_player
+        rescue ColumnFull
+          @display.column_full_message
+          sleep(0.50)
+        end
       end
     end
   end
