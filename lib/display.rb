@@ -70,8 +70,4 @@ class Display
   def quit
     puts 'Thanks for playing!'
   end
-
-  def column_full_message
-    puts 'That column is already full, please choose another.'
-  end
 end
